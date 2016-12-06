@@ -1,6 +1,7 @@
 
 public Vector3 FallChp;
 public bool onGround;
+public float jumpHeight;
 
 private Rigidbody rb;
 
@@ -20,7 +21,7 @@ Void Jump () {
 
 	if (onGround == true && Input.GetKey(KeyCode.Space)){
 
-		rb.velocity()
+		rb.velocity(rb.velocity.x, jumpHeight, rb.velocity.z);
 
 	}
 	
