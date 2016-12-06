@@ -1,62 +1,68 @@
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
 
-public Vector3 FallChp;
-public bool onGround;
-public float jumpHeight;
+public class playerMovement : MonoBehaviour {
 
-private Rigidbody rb;
+	public Vector3 FallChp;
+	public bool onGround;
+	public float jumpHeight;
 
-Void Start () {
+	private Rigidbody rb;
 
-	rb = 	GetComponent<Rigidbody>();
+	void Start () {
 
-}
-
-Void Update () {
-	Jump();
-	CallBack();
-
-}
-
-Void Jump () {
-
-	if (onGround == true && Input.GetKey(KeyCode.Space)){
-
-		rb.velocity(rb.velocity.x, jumpHeight, rb.velocity.z);
+		rb = GetComponent<Rigidbody>();
 
 	}
+
+	void Update () {
+		Jump();
+		CallBack();
+
+	}
+
+	void Jump () {
+
+		if (onGround == true && Input.GetKey(KeyCode.Space)){
+
+			rb.velocity(rb.velocity.x, jumpHeight, rb.velocity.z);
+
+		}
 	
-}
+	}
 
-Void OnCollisionEnter (Collision col) {
+	void OnCollisionEnter (Collision col) {
 
-	if (col.collide.CompareTag("floor")){
+		if (col.collide.CompareTag("floor")){
 
-		onGround = true;
+			onGround = true;
 
-	} 
+		} 
 
-}
+	}
 
-void OnCollisionExit (Collision col) {
+	void OnCollisionExit (Collision col) {
 
-	if (col.collide.CompareTag("floor")){
+		if (col.collide.CompareTag("floor")){
 		onGround = false;
-	}
-
-}
-
-void CallBack () {
-
-	if (onGround == true) {
-
-		FallChp = transform.position;
+		}
 
 	}
 
-	if (onGround == false && transform.position.y < 3f) {
+	void CallBack () {
 
-		transform.position = FallChp;
+		if (onGround == true) {
+
+			FallChp = transform.position;
+
+		}
+
+		if (onGround == false && transform.position.y < 3f) {
+
+			transform.position = FallChp;
+
+		}
 
 	}
-
 }
